@@ -1,0 +1,19 @@
+import pandas as pd
+data = {'Student_ID': [1, 2, 3, 4, 5],
+        'Course': ['Math', 'English', 'Math', 'Physics', 'English'],
+        'Score': [85, 90, 78, 92, 88],
+        'Hours_Studied': [20, 25, 15, 30, 22]}
+
+student_data = pd.DataFrame(data)
+
+correlation_by_course = student_data.groupby('Course').apply(lambda x: x['Hours_Studied'].corr(x['Score'])).reset_index(name='Correlation')
+print("Correlation between Hours_Studied and Score for each course:\n", correlation_by_course)
+
+strongest_correlation_course = correlation_by_course.loc[correlation_by_course['Correlation'].idxmax()]
+weakest_correlation_course = correlation_by_course.loc[correlation_by_course['Correlation'].idxmin()]
+
+print("\nCourse with the strongest correlation:\n", strongest_correlation_course)
+print("\nCourse with the weakest correlation:\n", weakest_correlation_course)
+
+average_scores_and_hours = student_data.groupby('Course').agg({'Score': 'mean', 'Hours_Studied': 'mean'}).reset_index()
+print("\nAverage scores and hours studied for each course:\n", average_scores_and_hours)
