@@ -1,0 +1,23 @@
+import numpy as np
+import pandas as pd
+
+
+data = np.array([
+    [4, 2000, 300000],
+    [3, 1800, 250000],
+    [5, 2400, 350000],
+    [4, 2200, 320000],
+    [6, 2800, 400000],
+])
+
+columns = ['Bedrooms', 'SquareFootage', 'SalePrice']
+
+house_data = pd.DataFrame(data, columns=columns)
+
+
+houses_more_than_four_bedrooms = house_data[house_data['Bedrooms'] > 4]
+
+
+average_sale_price_more_than_four_bedrooms = np.mean(houses_more_than_four_bedrooms['SalePrice'])
+
+print("Average Sale Price of Houses with More than Four Bedrooms:", average_sale_price_more_than_four_bedrooms)
